@@ -1,5 +1,5 @@
 
-import MainForm from "./components/mainForm";
+import MainForm from "./components/MainForm";
 
 function App() {
   return (

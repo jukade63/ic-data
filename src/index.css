@@ -6,11 +6,29 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e5e5e5;
+  font-family: 'Bai Jamjuree', sans-serif;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input[type="date"], input[type="file"]  {
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+label {
+  font-weight: bold;
+}
+
+label span {
+  font-weight: 400;
+}
+
+textarea {
+  resize: none;
 }
 
 .container {
@@ -19,14 +37,39 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 600px;
+  margin: 20px;
 }
 
 /* Styles for the entire form */
 .myForm {
-  max-width: 400px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
 }
+
+.submitBtn{
+  grid-column: span 2;
+  text-align: center;
+}
+
+.submitBtn button {
+  background-color: rgba(22, 217, 22, 1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.submitBtn button:hover{
+  background-color: rgba(34, 223, 34, 0.8);;
+
+}
+
 
 /* Styles for each form group */
 .formGroup {
@@ -40,8 +83,57 @@ code {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-top: 5px;
 }
 
-.errorText{
+.inputField:focus {
+  outline: none;
+  border: 1.5px solid rgb(6, 6, 130);
+}
+
+.errorText {
   color: red;
+}
+
+.placeholder,
+.img-wrapper {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.selectedImage {
+  position: relative;
+  display: inline-block;
+}
+
+.selectedImage img {
+  display: block;
+}
+
+.selectedImage button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(233, 230, 230, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.selectedImage button:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+}
+
+.selectedImage .closeIcon {
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
 }
