@@ -49,41 +49,24 @@ textarea {
   column-gap: 50px;
 }
 
-.submitBtn{
-  grid-column: span 2;
-  text-align: center;
-}
 
-.submitBtn button {
-  background-color: rgba(22, 217, 22, 1);
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: 'Bai Jamjuree', sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-}
-
-.submitBtn button:hover{
-  background-color: rgba(34, 223, 34, 0.8);;
-
-}
 
 
 /* Styles for each form group */
 .formGroup {
   margin-bottom: 15px;
+  max-width: 300px;
 }
 
 /* Styles for input fields */
-.inputField {
-  width: 100%;
+.inputField{
+  width: 270px;
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 5px;
+  display: inline-block;
 }
 
 .inputField:focus {
@@ -93,6 +76,7 @@ textarea {
 
 .errorText {
   color: red;
+  font-size: 12px;
 }
 
 .placeholder,
@@ -136,4 +120,25 @@ textarea {
   font-size: 20px;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
+}
+
+.submitBtn{
+  grid-column: span 2;
+  text-align: center;
+}
+
+.submitBtn button {
+  background-color: rgba(22, 217, 22, 1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.submitBtn button:hover{
+  background-color: rgba(34, 223, 34, 0.8);;
+
 }

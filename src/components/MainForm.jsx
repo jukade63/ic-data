@@ -3,6 +3,7 @@ import imagePlaceholder from "../assests/img-placeholder.svg";
 
 function MainForm() {
   const [formData, setFormData] = useState({
+    id: "",
     firstname: "",
     lastname: "",
     birthDate: "",
@@ -10,6 +11,7 @@ function MainForm() {
   });
 
   const [errors, setErrors] = useState({
+    id: "",
     firstname: "",
     lastname: "",
     birthDate: "",
@@ -34,6 +36,7 @@ function MainForm() {
   const validateForm = () => {
     let valid = true;
     const newErrors = {
+      id: "",
       firstname: "",
       lastname: "",
       birthDate: "",
@@ -41,6 +44,14 @@ function MainForm() {
     };
 
     // Add validation rules here
+    if (formData.id.trim() === "") {
+      newErrors.id = "กรุณาเลขที่บัตรประชาชน";
+      valid = false;
+    }
+    if (formData.id.trim().length !== 13 || !parseInt(formData.id.trim()))  {
+      newErrors.id = "เลขบัตรประชาชนไม่ถูกต้อง";
+      valid = false;
+    }
     if (formData.firstname.trim() === "") {
       newErrors.firstname = "กรุณากรอกชื่อ";
       valid = false;
@@ -74,6 +85,7 @@ function MainForm() {
       console.log(formData);
       // Reset form fields after submission if needed
       setFormData({
+        id: "",
         firstname: "",
         lastname: "",
         birthDate: "",
@@ -107,6 +119,21 @@ function MainForm() {
       <h1>กรุณากรอกข้อมูลตามบัตรประชาชน</h1>
       <form onSubmit={handleSubmit} className="myForm">
         <section className="textForm">
+        <div className="formGroup">
+            <label>
+              เลขที่บัตรประชาชน:
+              <input
+                type="text"
+                name="id"
+                value={formData.id}
+                onChange={handleInputChange}
+                className="inputField"
+              />
+              {errors.id && (
+                <span className="errorText">{errors.id}</span>
+              )}
+            </label>
+          </div>
           <div className="formGroup">
             <label>
               ชื่อ:
