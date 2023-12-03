@@ -6,17 +6,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e5e5e5;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
+  --toastify-font-family: "Bai Jamjuree", sans-serif;
 }
+
 
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-input[type="date"], input[type="file"]  {
-  font-family: 'Bai Jamjuree', sans-serif;
+input,
+button {
+  font-family: inherit;
 }
 
 label {
@@ -49,9 +51,6 @@ textarea {
   column-gap: 50px;
 }
 
-
-
-
 /* Styles for each form group */
 .formGroup {
   margin-bottom: 15px;
@@ -59,7 +58,7 @@ textarea {
 }
 
 /* Styles for input fields */
-.inputField{
+.inputField {
   width: 270px;
   padding: 8px;
   font-size: 16px;
@@ -122,7 +121,7 @@ textarea {
   transition: color 0.3s ease-in-out;
 }
 
-.submitBtn{
+.submitBtn {
   grid-column: span 2;
   text-align: center;
 }
@@ -131,14 +130,128 @@ textarea {
   background-color: rgba(22, 217, 22, 1);
   padding: 10px 20px;
   border-radius: 5px;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
   font-weight: 600;
   font-size: 20px;
   border: none;
   cursor: pointer;
 }
 
-.submitBtn button:hover{
-  background-color: rgba(34, 223, 34, 0.8);;
+.submitBtn button:hover {
+  background-color: rgba(34, 223, 34, 0.8);
+}
 
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.search-container input[type="text"],
+.search-container button {
+  margin: 0 10px; /* Increased margin */
+  padding: 12px 20px; /* Increased padding */
+  border: none;
+  border-radius: 8px; /* Increased border-radius */
+  font-size: 18px; /* Increased font size */
+}
+
+.search-container input[type="text"] {
+  background-color: #f0f8f7;
+}
+
+.search-container button {
+  background-color: #5cb85c;
+  color: white;
+  cursor: pointer;
+}
+
+/* Hover styles for button */
+.search-container button:hover {
+  background-color: #4cae4c;
+}
+.user-details-container {
+  margin-top: 50px; /* Adjust margin to create space below fixed search input */
+  padding: 20px; /* Add padding for UserDetails */
+}
+
+/*User detail section*/
+.user-details {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.user-info {
+  margin-bottom: 20px;
+}
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 18px;
+}
+
+.input-field:disabled {
+  background-color: #f9f9f9;
+  color: #555;
+}
+
+.button-container {
+  padding-bottom: 20px;
+}
+
+.edit-button,
+.cancel-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #254bb6; /* Green color */
+  color: white;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+ 
+}
+
+.cancel-button {
+  background-color: #f44336; /* Red color */
+  color: white;
+  position: absolute;
+  top: 80px;
+  left: 40%;
+}
+
+.edit-button:hover {
+  background-color: #0a3099;
+}
+.cancel-button:hover {
+  background-color: #c62828;
 }

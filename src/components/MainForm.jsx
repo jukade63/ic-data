@@ -1,36 +1,32 @@
 import React, { useState } from "react";
 import imagePlaceholder from "../assests/img-placeholder.svg";
+import axios from "axios";
 
 function MainForm() {
   const [formData, setFormData] = useState({
     id: "",
     firstname: "",
     lastname: "",
-    birthDate: "",
+    DOB: "",
     address: "",
   });
+
+  const [file, setFile] = useState(null);
 
   const [errors, setErrors] = useState({
     id: "",
     firstname: "",
     lastname: "",
-    birthDate: "",
+    DOB: "",
     address: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
-    if (type === "file") {
-      setFormData({
-        ...formData,
-        [name]: e.target.files[0], // Get the selected file
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const validateForm = () => {
@@ -39,7 +35,7 @@ function MainForm() {
       id: "",
       firstname: "",
       lastname: "",
-      birthDate: "",
+      DOB: "",
       address: "",
     };
 
@@ -48,7 +44,7 @@ function MainForm() {
       newErrors.id = "กรุณาเลขที่บัตรประชาชน";
       valid = false;
     }
-    if (formData.id.trim().length !== 13 || !parseInt(formData.id.trim()))  {
+    if ((formData.id.trim().length !== 13) | !parseInt(formData.id.trim())) {
       newErrors.id = "เลขบัตรประชาชนไม่ถูกต้อง";
       valid = false;
     }
@@ -62,8 +58,8 @@ function MainForm() {
       valid = false;
     }
 
-    if (formData.birthDate.trim() === "") {
-      newErrors.birthDate = "กรุณากรอกวันเกิด";
+    if (formData.DOB.trim() === "") {
+      newErrors.DOB = "กรุณากรอกวันเกิด";
       valid = false;
     }
 
@@ -76,42 +72,68 @@ function MainForm() {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
+    const multiPart = new FormData();
+    console.log(formData);
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key)) {
+        multiPart.append(key, formData[key]);
+      }
+    }
+    multiPart.append('image', file)
 
     if (isValid) {
-      // Handle form submission here
-      console.log(formData);
+      try {
+        
+        // multiPart.append("image", file);
+        // multiPart.append("id", formData.id);
+        // multiPart.append("firstname", formData.firstname);
+        // multiPart.append("lastname", formData.lastname);
+        // multiPart.append("DOB", formData.DOB);
+        // multiPart.append("address", formData.address);
+       
+
+        console.log(multiPart.get('image'));
+        console.log(multiPart.get('id'));
+        console.log(multiPart.get('firstname'));
+        console.log(multiPart.get('lastname'));
+        
+        await axios.post("http://localhost:3001/addUser", 
+          multiPart,
+          {headers: { "Content-Type": "multipart/form-data" }},
+        );
+
+        console.log("Form submitted successfully!");
+      } catch (error) {
+        console.error("Error uploading file or submitting form:", error);
+      }
+
       // Reset form fields after submission if needed
       setFormData({
         id: "",
         firstname: "",
         lastname: "",
-        birthDate: "",
+        DOB: "",
         address: "",
       });
     }
   };
 
   const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setFormData({
-          ...formData,
-          image: e.target.result,
-        });
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
+    // if (e.target.files && e.target.files[0]) {
+    setFile(e.target.files[0]);
+    // const reader = new FileReader();
+    // reader.onload = (e) => {
+
+    // };
+    // reader.readAsDataURL(e.target.files[0]);
+    // }
   };
 
   const removeImage = () => {
-    setFormData({
-      ...formData,
-      image: null,
-    });
+    setFile(null);
   };
 
   return (
@@ -119,7 +141,7 @@ function MainForm() {
       <h1>กรุณากรอกข้อมูลตามบัตรประชาชน</h1>
       <form onSubmit={handleSubmit} className="myForm">
         <section className="textForm">
-        <div className="formGroup">
+          <div className="formGroup">
             <label>
               เลขที่บัตรประชาชน:
               <input
@@ -129,9 +151,7 @@ function MainForm() {
                 onChange={handleInputChange}
                 className="inputField"
               />
-              {errors.id && (
-                <span className="errorText">{errors.id}</span>
-              )}
+              {errors.id && <span className="errorText">{errors.id}</span>}
             </label>
           </div>
           <div className="formGroup">
@@ -169,14 +189,12 @@ function MainForm() {
               วันเกิด:
               <input
                 type="date"
-                name="birthDate"
-                value={formData.birthDate}
+                name="DOB"
+                value={formData.DOB}
                 onChange={handleInputChange}
                 className="inputField"
               />
-              {errors.birthDate && (
-                <span className="errorText">{errors.birthDate}</span>
-              )}
+              {errors.DOB && <span className="errorText">{errors.DOB}</span>}
             </label>
           </div>
           <div className="formGroup">
@@ -187,7 +205,6 @@ function MainForm() {
                 value={formData.address}
                 onChange={handleInputChange}
                 className="inputField"
-                
               />
               {errors.address && (
                 <span className="errorText">{errors.address}</span>
@@ -199,11 +216,11 @@ function MainForm() {
           <div className="formGroup">
             <label>
               เลือกรูป:
-              {formData.image ? (
+              {file ? (
                 <div className="img-wrapper">
                   <div className="selectedImage">
-                    <img src={formData.image} alt="Selected" width={200} />
-                    {formData.image && (
+                    <img src={file} alt="Selected" width={200} />
+                    {file && (
                       <button onClick={removeImage} className="closeButton">
                         <span className="material-icons closeIcon">close</span>
                       </button>
