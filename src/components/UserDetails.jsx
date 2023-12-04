@@ -11,13 +11,6 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
     DOB: false,
     address: false,
   });
-  // const [updatedUserData, setUpdatedUserData] = useState({
-  //   id: user.id,
-  //   firstname: user.firstname,
-  //   lastname: user.lastname,
-  //   DOB: user.DOB.slice(0, 10),
-  //   address: user.address,
-  // });
 
   const [edited, setEdited] = useState(false);
   const [inputDisabled, setInputDisabled] = useState(true);
@@ -33,9 +26,6 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
     console.log(isEdited);
   }, [editableFields]);
 
-  // useEffect(()=>{
-  //   setUserData(user)
-  // },[userId])
   const handleInputChange = (e, fieldName) => {
     setEditableFields({
       ...editableFields,
@@ -96,8 +86,7 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
       if (file) {
         multiPart.append("image", file);
       }
-      console.log(multiPart.get('image'));
-      console.log(multiPart.get('firstname'));
+
       axios
         .put(`http://localhost:3001/update-user/${user.id}`, multiPart, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -114,10 +103,8 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
             imageUrl: false,
           });
           setTimeout(() => {
-            toast.success("แก้ไขข้อมูลสำเร็จ!", {
-              position: toast.POSITION.TOP_CENTER,
-            });
-          }, 600);
+            toast.success("แก้ไขข้อมูลสำเร็จ!");
+          }, 800);
         })
         .catch((error) => {
           console.error("Error updating user data:", error);

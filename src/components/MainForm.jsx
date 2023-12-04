@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import imagePlaceholder from "../assests/img-placeholder.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MainForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     id: "",
     firstname: "",
@@ -93,6 +97,13 @@ function MainForm() {
         );
 
         console.log("Form submitted successfully!");
+        setTimeout(() => {
+          toast.success("ลงทะเบียนสำเร็จ!");
+        }, 500);
+       
+        setTimeout(() => {
+          navigate('/search')
+        }, 2000);
       } catch (error) {
         console.error("Error uploading file or submitting form:", error);
       }
@@ -104,6 +115,8 @@ function MainForm() {
         DOB: "",
         address: "",
       });
+      setFile(null)
+     
     }
   };
 
