@@ -17,6 +17,7 @@ code {
     monospace;
 }
 input,
+textarea,
 button {
   font-family: inherit;
 }
@@ -47,12 +48,14 @@ textarea {
 .myForm {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr auto;
   column-gap: 50px;
 }
 
+
 /* Styles for each form group */
-.formGroup {
+.form-group {
   margin-bottom: 15px;
   max-width: 300px;
 }
@@ -121,12 +124,14 @@ textarea {
   transition: color 0.3s ease-in-out;
 }
 
-.submitBtn {
-  grid-column: span 2;
+.submit-btn {
   text-align: center;
+  width: 100%;
+  grid-column: span 2;
+  margin-top: 50px;
 }
 
-.submitBtn button {
+.submit-btn button {
   background-color: rgba(22, 217, 22, 1);
   padding: 10px 20px;
   border-radius: 5px;
@@ -137,7 +142,7 @@ textarea {
   cursor: pointer;
 }
 
-.submitBtn button:hover {
+.submit-btn button:hover {
   background-color: rgba(34, 223, 34, 0.8);
 }
 
@@ -181,16 +186,17 @@ textarea {
 
 /*User detail section*/
 .user-details {
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
-  position: relative;
+  max-width: 900px;
 }
 
 .user-info {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .input-container {
@@ -219,7 +225,7 @@ label {
 }
 
 .button-container {
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .edit-button,
@@ -236,8 +242,8 @@ label {
   background-color: #254bb6; /* Green color */
   color: white;
   position: absolute;
-  top: 80px;
-  left: 50%;
+  top: 0;
+  right: 30px;
  
 }
 
@@ -245,8 +251,8 @@ label {
   background-color: #f44336; /* Red color */
   color: white;
   position: absolute;
-  top: 80px;
-  left: 40%;
+  top: 0;
+  right: 105px;
 }
 
 .edit-button:hover {
@@ -259,7 +265,10 @@ label {
 .grid{
   display: grid;
   grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  grid-template-rows: auto;
 }
+
 
 .image-info {
 text-align: center;

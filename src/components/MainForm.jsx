@@ -136,10 +136,10 @@ function MainForm() {
 
   return (
     <div className="container">
-      <h1>กรุณากรอกข้อมูลตามบัตรประชาชน</h1>
+      <h1>กรุณากรอกข้อมูลเพื่อลงทะเบียน</h1>
       <form onSubmit={handleSubmit} className="myForm">
-        <section className="textForm">
-          <div className="formGroup">
+        <section className="text-form">
+          <div className="form-group">
             <label>
               เลขที่บัตรประชาชน:
               <input
@@ -152,7 +152,7 @@ function MainForm() {
               {errors.id && <span className="errorText">{errors.id}</span>}
             </label>
           </div>
-          <div className="formGroup">
+          <div className="form-group">
             <label>
               ชื่อ:
               <input
@@ -167,7 +167,7 @@ function MainForm() {
               )}
             </label>
           </div>
-          <div className="formGroup">
+          <div className="form-group">
             <label>
               นามสกุล:
               <input
@@ -182,7 +182,7 @@ function MainForm() {
               )}
             </label>
           </div>
-          <div className="formGroup">
+          <div className="form-group">
             <label>
               วันเกิด:
               <input
@@ -195,7 +195,7 @@ function MainForm() {
               {errors.DOB && <span className="errorText">{errors.DOB}</span>}
             </label>
           </div>
-          <div className="formGroup">
+          <div className="form-group">
             <label>
               ที่อยู่:
               <textarea
@@ -214,10 +214,10 @@ function MainForm() {
             <label>เลือกรูป:</label>
               {file ? (
                 <div className="img-wrapper">
-                  <div className="selectedImage">
+                  <div className="selected-image">
                     <img src={imagePreview} alt="Selected" width={200} />
                     {file && (
-                      <button onClick={removeImage} className="closeButton">
+                      <button onClick={removeImage} className="close-btn">
                         <span className="material-icons closeIcon">close</span>
                       </button>
                     )}
@@ -236,8 +236,8 @@ function MainForm() {
                 className="inputField"
               />           
         </section>
-        <div className="formGroup submitBtn">
-          <button type="submit" className="submitButton">
+        <div className="submit-btn">
+          <button type="submit" >
             บันทึก
           </button>
         </div>

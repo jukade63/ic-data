@@ -114,7 +114,7 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
           setInputDisabled(true);
           setShowCancelButton(false);
           setUserId("");
-          buttonText = 'แก้ไข'
+          buttonText = "แก้ไข";
         });
     }
   };
@@ -124,20 +124,21 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
   return (
     <div className="user-details">
       <h2>ผลการค้นหา</h2>
-      <div className="button-container">
-        {showCancelButton ? (
-          <button className="cancel-button" onClick={handleCancel}>
-            ยกเลิก
-          </button>
-        ) : (
-          <p></p>
-        )}
-        <button className="edit-button" onClick={handleUpdate}>
-          {buttonText}
-        </button>
-      </div>
+
       <div className="grid">
         <div className="user-info">
+          <div className="button-container">
+            {showCancelButton ? (
+              <button className="cancel-button" onClick={handleCancel}>
+                ยกเลิก
+              </button>
+            ) : (
+              <p></p>
+            )}
+            <button className="edit-button" onClick={handleUpdate}>
+              {buttonText}
+            </button>
+          </div>
           <div className="input-container">
             <label htmlFor="">เลขที่บัตรประชาชน</label>
             <input
@@ -206,14 +207,16 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
               <img src={user.imageUrl} alt="Selected" width={200} />
             </div>
           )}
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="inputField"
-            disabled={inputDisabled}
-          />
+
+          {!inputDisabled && (
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="inputField"
+            />
+          )}
         </div>
       </div>
     </div>
