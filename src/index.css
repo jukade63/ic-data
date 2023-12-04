@@ -84,16 +84,16 @@ textarea {
   margin-bottom: 10px;
 }
 
-.selectedImage {
+.selected-image {
   position: relative;
   display: inline-block;
 }
 
-.selectedImage img {
+.selected-image img {
   display: block;
 }
 
-.selectedImage button {
+.selected-image button {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -110,12 +110,12 @@ textarea {
   transition: background-color 0.3s ease-in-out;
 }
 
-.selectedImage button:hover {
+.selected-image button:hover {
   background-color: rgba(255, 0, 0, 0.8);
   color: white;
 }
 
-.selectedImage .closeIcon {
+.selected-image .closeIcon {
   font-size: 20px;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
@@ -254,4 +254,19 @@ label {
 }
 .cancel-button:hover {
   background-color: #c62828;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.image-info {
+text-align: center;
+}
+.image-info img{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }

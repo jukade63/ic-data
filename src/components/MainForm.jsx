@@ -12,6 +12,7 @@ function MainForm() {
   });
 
   const [file, setFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null)
 
   const [errors, setErrors] = useState({
     id: "",
@@ -86,20 +87,6 @@ function MainForm() {
 
     if (isValid) {
       try {
-        
-        // multiPart.append("image", file);
-        // multiPart.append("id", formData.id);
-        // multiPart.append("firstname", formData.firstname);
-        // multiPart.append("lastname", formData.lastname);
-        // multiPart.append("DOB", formData.DOB);
-        // multiPart.append("address", formData.address);
-       
-
-        console.log(multiPart.get('image'));
-        console.log(multiPart.get('id'));
-        console.log(multiPart.get('firstname'));
-        console.log(multiPart.get('lastname'));
-        
         await axios.post("http://localhost:3001/addUser", 
           multiPart,
           {headers: { "Content-Type": "multipart/form-data" }},
@@ -110,7 +97,6 @@ function MainForm() {
         console.error("Error uploading file or submitting form:", error);
       }
 
-      // Reset form fields after submission if needed
       setFormData({
         id: "",
         firstname: "",
@@ -122,18 +108,17 @@ function MainForm() {
   };
 
   const handleImageChange = (e) => {
-    // if (e.target.files && e.target.files[0]) {
-    setFile(e.target.files[0]);
-    // const reader = new FileReader();
-    // reader.onload = (e) => {
-
-    // };
-    // reader.readAsDataURL(e.target.files[0]);
-    // }
+    console.log('image input:', e.target);
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0]))
+    }
   };
 
-  const removeImage = () => {
+  const removeImage = (e) => {
+    console.log('close button:', e.target);
     setFile(null);
+    setImagePreview(null)
   };
 
   return (
@@ -213,13 +198,11 @@ function MainForm() {
           </div>
         </section>
         <section className="image-form">
-          <div className="formGroup">
-            <label>
-              เลือกรูป:
+            <label>เลือกรูป:</label>
               {file ? (
                 <div className="img-wrapper">
                   <div className="selectedImage">
-                    <img src={file} alt="Selected" width={200} />
+                    <img src={imagePreview} alt="Selected" width={200} />
                     {file && (
                       <button onClick={removeImage} className="closeButton">
                         <span className="material-icons closeIcon">close</span>
@@ -238,9 +221,7 @@ function MainForm() {
                 accept="image/*"
                 onChange={handleImageChange}
                 className="inputField"
-              />
-            </label>
-          </div>
+              />           
         </section>
         <div className="formGroup submitBtn">
           <button type="submit" className="submitButton">
