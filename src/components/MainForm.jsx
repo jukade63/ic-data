@@ -203,6 +203,7 @@ function MainForm() {
                 value={formData.address}
                 onChange={handleInputChange}
                 className="inputField"
+                rows={4}
               />
               {errors.address && (
                 <span className="errorText">{errors.address}</span>
