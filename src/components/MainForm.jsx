@@ -91,7 +91,7 @@ function MainForm() {
 
     if (isValid) {
       try {
-        await axios.post("http://localhost:3001/addUser", 
+        await axios.post("api/add-user", 
           multiPart,
           {headers: { "Content-Type": "multipart/form-data" }},
         );

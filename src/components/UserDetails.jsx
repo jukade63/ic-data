@@ -88,7 +88,7 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
       }
 
       axios
-        .put(`http://localhost:3001/update-user/${user.id}`, multiPart, {
+        .put(`api/update-user/${user.id}`, multiPart, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => {

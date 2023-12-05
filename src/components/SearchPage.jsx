@@ -14,7 +14,7 @@ const SearchPage = () => {
     setLoading(true);
     setError(null);
 
-    axios.get(`http://localhost:3001/get-user/${userId}`)
+    axios.get(`api/get-user/${userId}`)
       .then((response) => {
         setUserData(response.data.user);
         console.log(response.data.user);
