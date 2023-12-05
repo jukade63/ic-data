@@ -17,7 +17,7 @@ const SearchPage = () => {
     axios.get(`api/get-user/${userId}`)
       .then((response) => {
         setUserData(response.data.user);
-        console.log(response.data.user);
+        console.log('user', response.data.user);
         setLoading(false);
       })
       .catch((error) => {
