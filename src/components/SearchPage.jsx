@@ -1,6 +1,6 @@
 import React, { useState} from "react";
-import axios from "axios";
 import UserDetails from "./UserDetails";
+import axiosInstance from '../axios'
 
 
 const SearchPage = () => {
@@ -14,7 +14,7 @@ const SearchPage = () => {
     setLoading(true);
     setError(null);
 
-    axios.get(`api/get-user/${userId}`)
+    axiosInstance.get(`/get-user/${userId}`)
       .then((response) => {
         setUserData(response.data.user);
         console.log('user', response.data.user);

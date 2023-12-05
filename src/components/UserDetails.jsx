@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from '../axios'
+
 
 const UserDetails = ({ user, userId, setUserData, setUserId }) => {
   const [editableFields, setEditableFields] = useState({
@@ -87,8 +88,8 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
         multiPart.append("image", file);
       }
 
-      axios
-        .put(`api/update-user/${user.id}`, multiPart, {
+      axiosInstance
+        .put(`/update-user/${user.id}`, multiPart, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => {

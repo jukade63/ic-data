@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import imagePlaceholder from "../assests/img-placeholder.svg";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from '../axios'
 
 function MainForm() {
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ function MainForm() {
 
     if (isValid) {
       try {
-        await axios.post("api/add-user", 
+        await axiosInstance.post("/add-user", 
           multiPart,
           {headers: { "Content-Type": "multipart/form-data" }},
         );
