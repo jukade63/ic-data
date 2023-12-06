@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axiosInstance from '../axios'
+import axiosInstance from "../axios";
 
-
-const UserDetails = ({ user, userId, setUserData, setUserId }) => {
+const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
   const [editableFields, setEditableFields] = useState({
     id: false,
     firstname: false,
@@ -56,7 +55,6 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
       DOB: false,
       address: false,
       imageUrl: false,
-      // Reset other user data fields if needed
     });
     setShowCancelButton(false);
   };
@@ -193,9 +191,9 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
             />
           </div>
         </div>
+
         <div className="image-container">
           {file ? (
-            // <div className="img-wrapper">
             <div className="new-image">
               <img src={imagePreview} alt="Selected" width={200} />
               <button onClick={removeImage} className="closeButton">
@@ -203,7 +201,6 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
               </button>
             </div>
           ) : (
-            // </div>
             <div className="image-info">
               <img src={user.imageUrl} alt="Selected" width={200} />
             </div>
@@ -218,6 +215,7 @@ const UserDetails = ({ user, userId, setUserData, setUserId }) => {
               className="inputField"
             />
           )}
+          <button onClick={() => setShowModal(true)}>ลบผู้ใช้</button>
         </div>
       </div>
     </div>

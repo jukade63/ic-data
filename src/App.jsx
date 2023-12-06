@@ -24,6 +24,8 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
       </Routes>
     </>
+    
+
   );
 }
 
