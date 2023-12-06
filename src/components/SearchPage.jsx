@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserDetails from "./UserDetails";
 import axiosInstance from "../axios";
 import ConfirmModal from "./ComfirmModal";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   const [userId, setUserId] = useState("");
@@ -39,16 +40,19 @@ const SearchPage = () => {
   const handleUserDelete = async () => {
     console.log(userData);
     try {
-      const response = await axiosInstance.delete(`/delete-user/${userData.id}?imageUrl=${userData.imageUrl}`);
+      const response = await axiosInstance.delete(
+        `/delete-user/${userData.id}?imageUrl=${userData.imageUrl}`
+      );
 
       if (response.status === 200) {
-        console.log('User deleted successfully');
+        console.log("User deleted successfully");
         setShowModal(false);
+        setUserData(null)
       } else {
-        console.error('Failed to delete user');
+        console.error("Failed to delete user");
       }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -59,13 +63,21 @@ const SearchPage = () => {
   return (
     <div>
       <div className="search-container">
-        <input
-          type="text"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          placeholder="Enter user IC number..."
-        />
-        <button onClick={handleSearch}>Search</button>
+        <Link to="/" style={{ color: "inherit", textDecoration: "inherit" }}>
+          <button className="home-link">
+            <span class="material-icons">keyboard_arrow_left</span>
+            กลับไปหน้าลงทะเบียน
+          </button>
+        </Link>
+        <div className="search-form">
+          <input
+            type="text"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            placeholder="กรอกเลขบัตรประชาชน 13 หลัก..."
+          />
+          <button onClick={handleSearch}>ค้นหา</button>
+        </div>
       </div>
 
       {userData && (

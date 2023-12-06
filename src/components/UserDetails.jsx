@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import imagePlaceholder from "../assests/img-placeholder.svg";
 import axiosInstance from "../axios";
 
 const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
@@ -119,6 +120,22 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
   };
 
   let buttonText = loading ? "กำลังอัปเดท.." : edited ? "อัปเดท" : "แก้ไข";
+  let imageToShow = file ? (
+    <div className="selected-image">
+      <img src={imagePreview} alt="Selected" />
+      <button onClick={removeImage} className="close-btn">
+        <span className="material-icons closeIcon">close</span>
+      </button>
+    </div>
+  ) : user.imageUrl ? (
+    <div className="image-info">
+      <img src={user.imageUrl} alt="Selected" />
+    </div>
+  ) : (
+    <div className="placeholder">
+      <img src={imagePlaceholder} alt="Selected" />
+    </div>
+  );
 
   return (
     <div className="user-details">
@@ -192,30 +209,20 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
           </div>
         </div>
 
-        <div className="image-container">
-          {file ? (
-            <div className="new-image">
-              <img src={imagePreview} alt="Selected" width={200} />
-              <button onClick={removeImage} className="closeButton">
-                <span className="material-icons closeIcon">close</span>
-              </button>
-            </div>
-          ) : (
-            <div className="image-info">
-              <img src={user.imageUrl} alt="Selected" width={200} />
-            </div>
-          )}
-
-          {!inputDisabled && (
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="inputField"
-            />
-          )}
-          <button onClick={() => setShowModal(true)}>ลบผู้ใช้</button>
+        <div className="img-wrapper">
+          <div className="img-container">
+            {imageToShow}
+            {!inputDisabled && (
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="inputField"
+              />
+            )}
+            <button onClick={() => setShowModal(true)}>ลบข้อมูล</button>
+          </div>
         </div>
       </div>
     </div>
