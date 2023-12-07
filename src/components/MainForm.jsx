@@ -47,7 +47,7 @@ function MainForm() {
 
     // Validation rules
     if (formData.id.trim() === "") {
-      newErrors.id = "กรุณาเลขที่บัตรประชาชน";
+      newErrors.id = "กรุณากรอกเลขที่บัตรประชาชน";
       valid = false;
     }
     if ((formData.id.trim().length !== 13) | !parseInt(formData.id.trim())) {
@@ -151,7 +151,7 @@ function MainForm() {
                 name="id"
                 value={formData.id}
                 onChange={handleInputChange}
-                className="inputField"
+                className="input-field"
               />
               {errors.id && <span className="error-text">{errors.id}</span>}
             </label>
@@ -164,7 +164,7 @@ function MainForm() {
                 name="firstname"
                 value={formData.firstname}
                 onChange={handleInputChange}
-                className="inputField"
+                className="input-field"
               />
               {errors.firstname && (
                 <span className="error-text">{errors.firstname}</span>
@@ -179,7 +179,7 @@ function MainForm() {
                 name="lastname"
                 value={formData.lastname}
                 onChange={handleInputChange}
-                className="inputField"
+                className="input-field"
               />
               {errors.lastname && (
                 <span className="error-text">{errors.lastname}</span>
@@ -194,7 +194,7 @@ function MainForm() {
                 name="DOB"
                 value={formData.DOB}
                 onChange={handleInputChange}
-                className="inputField"
+                className="input-field"
               />
               {errors.DOB && <span className="error-text">{errors.DOB}</span>}
             </label>
@@ -206,7 +206,7 @@ function MainForm() {
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                className="inputField"
+                className="input-field"
                 rows={4}
               />
               {errors.address && (
@@ -238,7 +238,7 @@ function MainForm() {
             name="image"
             accept="image/*"
             onChange={handleImageChange}
-            className="inputField"
+            className="input-field"
           />
         </section>
         <div className="submit-btn">

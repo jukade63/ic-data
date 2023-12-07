@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import imagePlaceholder from "../assests/img-placeholder.svg";
 import axiosInstance from "../axios";
+import formatDate from '../utils/dateFormat'
+
 
 const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
   const [editableFields, setEditableFields] = useState({
@@ -13,6 +15,14 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
     address: false,
   });
 
+  const [originalData, setOriginalData] = useState({
+    id: user.id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    DOB: user.DOB.slice(0, 10),
+    address: user.address,
+  });
+
   const [edited, setEdited] = useState(false);
   const [inputDisabled, setInputDisabled] = useState(true);
   const [showCancelButton, setShowCancelButton] = useState(false);
@@ -20,12 +30,19 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
 
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const isEdited = Object.values(editableFields).some((field) => field);
     setEdited(isEdited);
     console.log(isEdited);
   }, [editableFields]);
+
+  useEffect(() => {
+    if (!inputDisabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputDisabled]);
 
   const handleInputChange = (e, fieldName) => {
     setEditableFields({
@@ -40,13 +57,14 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
 
   const handleCancel = () => {
     setEdited(false);
+    setFile(null)
     setInputDisabled(true);
     setUserData({
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      DOB: user.DOB.slice(0, 10),
-      address: user.address,
+      ...user,
+      firstname: originalData.firstname,
+      lastname: originalData.lastname,
+      DOB: originalData.DOB.slice(0, 10),
+      address: originalData.address,
       imageUrl: user.imageUrl,
     });
     setEditableFields({
@@ -63,6 +81,7 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
+      setEdited(true)
       setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
@@ -73,6 +92,7 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
   };
 
   const handleUpdate = () => {
+
     setShowCancelButton(true);
     setInputDisabled(false);
     if (buttonText === "อัปเดท") {
@@ -167,8 +187,9 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
           <div className="input-container">
             <label htmlFor="">ชื่อ</label>
             <input
-              className="input-field"
+              className="input-field first-name"
               type="text"
+              ref={inputRef}
               value={user.firstname}
               disabled={inputDisabled}
               onChange={(e) => handleInputChange(e, "firstname")}
@@ -190,7 +211,7 @@ const UserDetails = ({ user, setShowModal, setUserData, setUserId }) => {
             <label htmlFor="">วันเกิด</label>
             <input
               className="input-field"
-              type="text"
+              type="date"
               value={user.DOB.slice(0, 10)}
               disabled={inputDisabled}
               onChange={(e) => handleInputChange(e, "DOB")}

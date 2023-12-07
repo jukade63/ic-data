@@ -3,6 +3,9 @@ import UserDetails from "./UserDetails";
 import axiosInstance from "../axios";
 import ConfirmModal from "./ComfirmModal";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import validateID from '../utils/validateID' //more concrete validation
 
 const SearchPage = () => {
   const [userId, setUserId] = useState("");
@@ -12,7 +15,6 @@ const SearchPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   const fetchUser = () => {
-    console.log("request");
     setLoading(true);
     setError(null);
 
@@ -24,16 +26,29 @@ const SearchPage = () => {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error.response?.data.message || "Error fetching user");
+        if (error.response && error.response.status === 404) {
+          setError("ไม่พบรายชื่อ");
+        } else {
+          setError("An error occurred while fetching user data");
+        }
         setLoading(false);
         setUserData(null);
       });
   };
 
+  const validateIDNumber = (idNumber) => {
+    const thaiIDPattern = /^[0-9]{13}$/;
+    return thaiIDPattern.test(idNumber);
+  }
+
   const handleSearch = () => {
-    if (userId) {
+    console.log(userId);
+    if (validateIDNumber(userId)) {
       fetchUser();
-      setUserId("");
+    }else{
+      setTimeout(() => {
+        toast.error("กรุณากรอกคำค้นหาให้ถูกต้อง");
+      }, 500);
     }
   };
 
@@ -47,7 +62,7 @@ const SearchPage = () => {
       if (response.status === 200) {
         console.log("User deleted successfully");
         setShowModal(false);
-        setUserData(null)
+        setUserData(null);
       } else {
         console.error("Failed to delete user");
       }
@@ -59,6 +74,8 @@ const SearchPage = () => {
   const handleCancel = () => {
     setShowModal(false);
   };
+
+  let buttonText = loading ? "กำลังค้นหา.." : 'ค้นหา'
 
   return (
     <div>
@@ -76,11 +93,11 @@ const SearchPage = () => {
             onChange={(e) => setUserId(e.target.value)}
             placeholder="กรอกเลขบัตรประชาชน 13 หลัก..."
           />
-          <button onClick={handleSearch}>ค้นหา</button>
+          <button className={loading ? 'search-btn btn-disabled' : 'search-btn'} onClick={handleSearch}>{buttonText}</button>
         </div>
       </div>
 
-      {userData && (
+      {userData ? (
         <UserDetails
           user={userData}
           setUserData={setUserData}
@@ -88,6 +105,10 @@ const SearchPage = () => {
           setUserId={setUserId}
           setShowModal={setShowModal}
         />
+      ) : (
+        <div className="not-found">
+          <h3>{error}</h3>
+        </div>
       )}
       {showModal && (
         <div className="overlay">

@@ -43,17 +43,18 @@ textarea {
 }
 
 .container {
-  height: 100vh;
+  height: 85vh;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-width: 600px;
-  margin: 20px;
-  padding: 20px 20px 50px 20px;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
 }
 .container h1 {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  font-size: 1.8em;
 }
 .myForm {
   margin: 0 auto;
@@ -68,14 +69,15 @@ textarea {
   max-width: 300px;
 }
 
-.inputField {
+.input-field {
   width: 270px;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
   margin-top: 5px;
   display: inline-block;
+  border-radius: 4px;
+  background-color: #dfe2e6;
 }
 
 .inputField:focus {
@@ -143,7 +145,7 @@ img {
   text-align: center;
   width: 100%;
   grid-column: span 2;
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -165,7 +167,7 @@ img {
   background-color: rgb(237, 106, 25);
 }
 
-.submit-btn .btn-disabled {
+.submit-btn .btn-disabled, .search-form .btn-disabled {
   cursor: not-allowed;
   pointer-events: none;
   color: #979595;
@@ -182,14 +184,14 @@ img {
   z-index: 999;
 }
 
-.search-container button:nth-child(2) {
+.search-btn {
   background-color: #5cb85c;
   color: white;
   cursor: pointer;
 }
 
 .search-container input[type="text"],
-.search-container button:nth-child(2) {
+.search-btn {
   margin: 0 10px;
   padding: 12px 20px;
   border: none;
@@ -198,7 +200,7 @@ img {
 }
 
 .search-container input[type="text"] {
-  background-color: #ddeae8;
+  background-color: #e8efee;
   width: 300px;
 }
 
@@ -236,15 +238,6 @@ label {
   font-weight: bold;
 }
 
-.input-field {
-  width: 100%;
-  max-width: 500px;
-  padding: 12px 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  font-size: 18px;
-}
 
 .input-field:disabled {
   background-color: #f9f9f9;
@@ -266,7 +259,7 @@ label {
 }
 
 .edit-button {
-  background-color: #254bb6; /* Green color */
+  background-color: #254bb6;
   color: white;
   position: absolute;
   top: 0;
@@ -278,7 +271,7 @@ label {
   color: white;
   position: absolute;
   top: 0;
-  right: 105px;
+  right: 120px;
 }
 
 .edit-button:hover {
@@ -349,6 +342,13 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.not-found{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 50px;
 }
 
 @media (max-width: 600px) {
